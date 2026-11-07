@@ -1050,15 +1050,19 @@ body {
         display: none;
     }
     
+    /* На телефоне показываем подменю только если есть класс open */
     .category-item.open .category-submenu {
         display: block;
     }
     
+    /* На телефоне полностью отключаем наведение */
     .category-item:hover .category-submenu {
-        display: none;
+        display: none !important;
     }
+    
+    /* Если открыто по клику, то показываем */
     .category-item.open:hover .category-submenu {
-        display: block;
+        display: block !important;
     }
 }
 

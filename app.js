@@ -210,4 +210,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (level1TogglePots) { level1TogglePots.classList.remove('active'); level2MenuPots.classList.remove('show'); }
         });
     }
+
+        // --- Открытие подкатегорий на мобильных (Подушки, Комплекты и т.д.) ---
+    const categoryNames = document.querySelectorAll('.category-name');
+    categoryNames.forEach(name => {
+        name.addEventListener('click', (e) => {
+            // Работает только на телефонах (ширина < 768)
+            if (window.innerWidth <= 768) {
+                const parentItem = e.target.closest('.category-item');
+                if (parentItem) {
+                    parentItem.classList.toggle('open');
+                }
+            }
+        });
+    });
 });
