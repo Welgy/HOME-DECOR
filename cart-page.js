@@ -1,5 +1,8 @@
 /* Функция для пересчета цены из строки в число */
 function parsePrice(priceStr) {
+    // Если пришла пустота или не строка — возвращаем 0
+    if (!priceStr || typeof priceStr !== 'string') return 0;
+    
     const cleanStr = priceStr.replace(/[^\d]/g, '');
     return parseInt(cleanStr) || 0;
 }
@@ -25,27 +28,48 @@ function renderCartPage() {
 
     let totalPrice = 0;
 
-    cart.forEach(cartItem => {
+        cart.forEach(cartItem => {
         const product = productsData.find(p => p.id == cartItem.id);
         if (!product) return;
+        
+                // Если товар не найден в базе, пропускаем его, чтобы не было ошибки
+        if (!product) {
+            console.warn("Товар не найден в базе:", cartItem.id);
+            return; 
+        }
 
-        const priceNumber = parsePrice(product.price);
-        totalPrice += priceNumber * cartItem.quantity;
+        // Если у товара есть кастомная цена (размер), берем её
+        const finalPrice = cartItem.customPrice ? cartItem.customPrice : parsePrice(product.price);
+        
+        let displayPrice = "";
+        if (cartItem.customPrice) {
+            displayPrice = `${cartItem.customPrice} BYN`;
+        } else if (product.sizes) {
+            const firstSize = Object.keys(product.sizes)[0];
+            displayPrice = 'от ' + product.sizes[firstSize].price + ' BYN';
+        } else {
+            displayPrice = product.price;
+        }
+        
+        // Добавляем размер к названию, если он есть
+        const displayTitle = cartItem.size ? `${product.title} (${cartItem.size})` : product.title;
+
+        totalPrice += finalPrice * cartItem.quantity;
 
         const itemHtml = `
             <div class="cart-item">
                 <div class="cart-item-info">
                     <img src="${product.image}" alt="${product.title}" class="cart-item-image">
                     <div>
-                        <div class="cart-item-title">${product.title}</div>
-                        <div class="cart-item-price">${product.price}</div>
+                        <div class="cart-item-title">${displayTitle}</div>
+                        <div class="cart-item-price">${displayPrice}</div>
                     </div>
                 </div>
                 <div class="cart-item-controls">
-                    <button class="quantity-btn" onclick="changeQuantity(${product.id}, -1)">−</button>
+                    <button class="quantity-btn" onclick="changeQuantity('${cartItem.cartItemId}', -1)">−</button>
                     <span>${cartItem.quantity}</span>
-                    <button class="quantity-btn" onclick="changeQuantity(${product.id}, 1)">+</button>
-                    <button class="remove-btn" onclick="removeFromCart(${product.id})">🗑️</button>
+                    <button class="quantity-btn" onclick="changeQuantity('${cartItem.cartItemId}', 1)">+</button>
+                    <button class="remove-btn" onclick="removeFromCart('${cartItem.cartItemId}')">🗑️</button>
                 </div>
             </div>
         `;
@@ -55,24 +79,23 @@ function renderCartPage() {
     totalElement.textContent = totalPrice.toLocaleString('ru-RU') + ' руб';
 }
 
-function changeQuantity(productId, delta) {
+function changeQuantity(cartItemId, delta) {
     let cart = getCart();
-    const item = cart.find(i => i.id == productId);
+    const item = cart.find(i => i.cartItemId === cartItemId);
     
     if (item) {
         item.quantity += delta;
         if (item.quantity <= 0) {
-            cart = cart.filter(i => i.id != productId);
+            cart = cart.filter(i => i.cartItemId !== cartItemId);
         }
         saveCart(cart);
         renderCartPage();
     }
 }
 
-/* удаление товара */
-function removeFromCart(productId) {
+function removeFromCart(cartItemId) {
     let cart = getCart();
-    cart = cart.filter(i => i.id != productId);
+    cart = cart.filter(i => i.cartItemId !== cartItemId);
     saveCart(cart);
     renderCartPage();
 }

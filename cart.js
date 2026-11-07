@@ -20,13 +20,25 @@ function updateCartCount() {
 }
 
 /* Добавление товара в корзину */
-function addToCart(productId) {
+/* Добавление товара в корзину */
+function addToCart(productId, size = null, customPrice = null) {
     const cart = getCart();
-    const existingItem = cart.find(item => item.id == productId);
+    
+    // Создаем уникальный ключ: если есть размер, добавляем его в ключ
+    const cartItemId = size ? `${productId}-${size}` : `${productId}`;
+    
+    const existingItem = cart.find(item => item.cartItemId === cartItemId);
+    
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({ id: productId, quantity: 1 });
+        cart.push({ 
+            cartItemId: cartItemId, // Уникальный ID для корзины
+            id: productId,          // Оригинальный ID товара
+            size: size,             // Выбранный размер (если есть)
+            customPrice: customPrice, // Цена для этого размера
+            quantity: 1 
+        });
     }
     saveCart(cart);
     alert("Товар добавлен в корзину!");

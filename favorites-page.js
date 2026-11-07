@@ -28,8 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${product.image}" alt="${product.title}">
                 </div>
                 <a href="product.html?id=${product.id}" class="product-title">${product.title}</a>
-                <p class="product-price">${product.price}</p>
-                <button class="buy-button" onclick="addToCart(${product.id})">В корзину</button>
+                <p class="product-price">${
+    product.sizes 
+    ? (Object.keys(product.sizes).length > 1 
+        ? 'от ' + Object.values(product.sizes)[0].price + ' BYN' 
+        : Object.values(product.sizes)[0].price + ' BYN')
+    : product.price
+}</p>
             </div>
         `;
         container.innerHTML += cardHtml;

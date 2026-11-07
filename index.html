@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Витрина техники — ELECTRONIC</title>
+    <title>Каталог — УЮТНЫЙ ДОМ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- шапка сайта -->
             <header class="site-header">
-        <a href="index.html" class="logo">ELECTRONIC</a>
+        <a href="index.html" class="logo">УЮТНЫЙ ДОМ</a>
         
         <!-- центральный блок -->
         <div class="header-center">
@@ -66,81 +66,192 @@
         </button>
 
         <div class="sidebar-wrapper" id="sidebar-wrapper">
-            <aside class="sidebar-filters">
+                                               <aside class="sidebar-filters">
                 <h3 style="display: flex; justify-content: space-between; align-items: center;">
                     Фильтры
                     <span id="close-filter-btn" style="cursor: pointer; font-size: 28px; color: #888; display: none;">&times;</span>
                 </h3>
                 
-                <div class="filter-group">
-                    <h4>Модель</h4>
-                    <div class="tabs-container category-tabs">
-                        <label class="tab-label">
-                            <input type="radio" name="category" class="category-cb" data-category="iphone">
-                            <span>iPhone</span>
-                        </label>
-                        <label class="tab-label">
-                            <input type="radio" name="category" class="category-cb" data-category="macbook">
-                            <span>MacBook</span>
-                        </label>
-                        <label class="tab-label">
-                            <input type="radio" name="category" class="category-cb" data-category="airpods">
-                            <span>AirPods</span>
-                        </label>
+                                <div class="filter-level-1" id="level-1-toggle">
+                    Постельное белье <span class="arrow">▼</span>
+                </div>
+
+                <div class="filter-level-2" id="level-2-menu">
+                    
+                    <!-- Категория: Комплекты -->
+                    <div class="category-item">
+                        <div class="category-name">Комплекты постельного белья <span class="arrow">▶</span></div>
+                        
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="1.5-спальный"> 1.5-спальный</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="2-спальный"> 2-спальный</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="Евро"> Евро</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                        </div>
                     </div>
-                    <div class="sub-filters" id="sub-iphone" style="display: none;">
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 17 Pro Max"> iPhone 17 Pro Max</label>
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 17"> iPhone 17</label>
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 16 Pro Max"> iPhone 16 Pro Max</label>
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 16"> iPhone 16</label>
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 15 Pro Max"> iPhone 15 Pro Max</label>
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="iPhone 15"> iPhone 15</label>
+
+                    <!-- Категория: Подушки -->
+                    <div class="category-item">
+                        <div class="category-name">Подушки <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="48х68"> 48х68</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="68х68"> 68х68</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Наполнитель</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="filling" value="Лебяжий пух"> Лебяжий пух</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="filling" value="Лен"> Лен</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="filling" value="Холлофайбер"> Холлофайбер</label>
+                        </div>
                     </div>
-                    <div class="sub-filters" id="sub-macbook" style="display: none;">
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="MacBook Air"> MacBook Air</label>
+
+                    <!-- Категория: Одеяла -->
+                    <div class="category-item">
+                        <div class="category-name">Одеяла <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="1.5-спальный"> 1.5-спальные</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="2-спальный"> 2-спальные</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="Евро"> Евро</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Полиэстер"> Полиэстер</label>
+                        </div>
                     </div>
-                    <div class="sub-filters" id="sub-airpods" style="display: none;">
-                        <label><input type="checkbox" class="filter-cb" data-filter="model" value="AirPods Pro"> AirPods Pro</label>
+
+                                        <!-- Категория: Покрывала -->
+                    <div class="category-item">
+                        <div class="category-name">Покрывала <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="1.5-спальный"> 1.5-спальный</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="2-спальный"> 2-спальный</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Стиль</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Гобелен"> Гобелен</label>
+                        </div>
+                    </div>
+
+                                        <!-- Категория: Простыни -->
+                    <div class="category-item">
+                        <div class="category-name">Простыни <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="145х220"> 145х220</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="180х220"> 180х220</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="210х220"> 210х220</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="220х240"> 220х240</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                        </div>
+                    </div>
+
+                                        <!-- Категория: Простыни на резинке -->
+                    <div class="category-item">
+                        <div class="category-name">Простыни на резинке <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х90х25"> 200х90х25</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х120х25"> 200х120х25</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х140х25"> 200х140х25</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х160х25"> 200х160х25</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х180х25"> 200х180х25</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="200х200х25"> 200х200х25</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                        </div>
+                    </div>
+
+                                        <!-- Категория: Пододеяльники -->
+                    <div class="category-item">
+                        <div class="category-name">Пододеяльники <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="147х215"> 147х215</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="215х175"> 215х175</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="215х205"> 215х205</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                        </div>
+                    </div>
+
+                                        <!-- Категория: Наволочки -->
+                    <div class="category-item">
+                        <div class="category-name">Наволочки <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="50х70"> 50х70</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="70х70"> 70х70</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="60х60"> 60х60</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="40х60"> 40х60</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="75х75"> 75х75</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="50х50"> 50х50</label>
+                            
+                            <div class="submenu-title" style="margin-top: 15px;">Ткань</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="fabric" value="Бязь"> Бязь</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="filter-group">
-                    <h4>Встроенная память</h4>
-                    <label><input type="checkbox" class="filter-cb" data-filter="memory" value="128GB"> 128 ГБ</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="memory" value="256GB"> 256 ГБ</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="memory" value="512GB"> 512 ГБ</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="memory" value="1TB"> 1 ТБ</label>
+                                <!-- КАТЕГОРИЯ: КАСТРЮЛИ -->
+                <div class="filter-level-1" id="level-1-toggle-pots">
+                    Кастрюли <span class="arrow">▼</span>
                 </div>
-
-                <div class="filter-group">
-                    <h4>Цвет</h4>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Black"> Черный (Black)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="White"> Белый (White)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Blue"> Синий (Blue)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Green"> Зеленый (Green)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Pink"> Розовый (Pink)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Fiol"> Фиолетовый (Fiol)</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="color" value="Orange"> Оранжевый (Orange)</label>
-                </div>
-
-                <div class="filter-group">
-                    <h4>Диагональ экрана</h4>
-                    <label><input type="checkbox" class="filter-cb" data-filter="screen" value="6.1"> 6.1"</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="screen" value="6.3"> 6.3"</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="screen" value="6.9"> 6.9"</label>
-                    <label><input type="checkbox" class="filter-cb" data-filter="screen" value="13.6"> 13.6" (MacBook)</label>
-                </div>
-
-                <div class="filter-group">
-                    <h4>Цена (BYN)</h4>
-                    <input type="range" id="price-range" min="0" max="5000" value="5000" step="50" style="width: 100%;">
-                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-top: 5px; color: #666;">
-                        <span>0</span>
-                        <span id="price-value">5000</span>
+                                <div class="filter-level-2" id="level-2-menu-pots">
+                    <div class="category-item">
+                        <div class="category-name">Кастрюли ASTIAT <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Объем</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="1.7 л"> 1.7 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="2 л"> 2 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="2.5 л"> 2.5 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="3 л"> 3 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="4.5 л"> 4.5 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="6.4 л"> 6.4 л</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="12 л"> 12 л</label>
+                        </div>
                     </div>
                 </div>
-                
-                <button id="reset-filters" style="width: 100%; padding: 8px; margin-top: 10px; cursor: pointer; background: #eee; border: 1px solid #ccc; border-radius: 4px;">Сбросить фильтры</button>
+
+                <!-- НОВАЯ КАТЕГОРИЯ: СКОВОРОДЫ -->
+                <div class="filter-level-1" id="level-1-toggle-pans">
+                    Сковороды <span class="arrow">▼</span>
+                </div>
+                                <div class="filter-level-2" id="level-2-menu-pans">
+                    <!-- Обычные сковороды -->
+                    <div class="category-item">
+                        <div class="category-name">Сковорода классическая <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="20 см"> 20 см</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="22 см"> 22 см</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="24 см"> 24 см</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="26 см"> 26 см</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="28 см"> 28 см</label>
+                        </div>
+                    </div>
+
+                    <!-- Блинные сковороды -->
+                    <div class="category-item">
+                        <div class="category-name">Сковорода блинная <span class="arrow">▶</span></div>
+                        <div class="category-submenu">
+                            <div class="submenu-title">Размеры</div>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="22 см"> 22 см</label>
+                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="24 см"> 24 см</label>
+                        </div>
+                    </div>
+                </div>
+                                <!-- Кнопка сброса фильтров (в самом низу) -->
+                <button id="reset-filters" class="reset-btn-main">Сбросить фильтры</button>
+            </aside>
+            </aside>
             </aside>
         </div>
 
