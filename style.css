@@ -121,7 +121,7 @@ body {
     display: block;
     line-height: 1.4;
     position: relative;
-    z-index: 10;
+    pointer-events: none;
 }
 
 .product-title:hover {
@@ -260,6 +260,13 @@ body {
 .cart-item-title {
     font-weight: bold;
     color: #0c1a30;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.cart-item-title:hover {
+    color: #194693;
+    text-decoration: underline;
 }
 
 .cart-item-price {

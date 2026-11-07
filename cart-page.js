@@ -57,15 +57,15 @@ function renderCartPage() {
         totalPrice += finalPrice * cartItem.quantity;
 
         const itemHtml = `
-            <div class="cart-item">
+            <div class="cart-item" onclick="window.location.href='product.html?id=${product.id}'" style="cursor: pointer;">
                 <div class="cart-item-info">
                     <img src="${product.image}" alt="${product.title}" class="cart-item-image">
                     <div>
-                        <div class="cart-item-title">${displayTitle}</div>
+                        <a href="product.html?id=${product.id}" class="cart-item-title" onclick="event.stopPropagation()">${displayTitle}</a>
                         <div class="cart-item-price">${displayPrice}</div>
                     </div>
                 </div>
-                <div class="cart-item-controls">
+                <div class="cart-item-controls" onclick="event.stopPropagation()">
                     <button class="quantity-btn" onclick="changeQuantity('${cartItem.cartItemId}', -1)">−</button>
                     <span>${cartItem.quantity}</span>
                     <button class="quantity-btn" onclick="changeQuantity('${cartItem.cartItemId}', 1)">+</button>
@@ -119,8 +119,8 @@ function checkout() {
                     Для завершения оформления, пожалуйста, <strong>позвоните нашему менеджеру</strong>. Мы уточним наличие товара и ответим на все вопросы.
                 </p>
 
-                <a href="tel:+375299897502" style="display: block; background: #194693; color: white; text-decoration: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-bottom: 15px; transition: background 0.2s;">
-                    📞 +375 29 XXX-XX-XX
+                <a href="tel:+375296554780" style="display: block; background: #194693; color: white; text-decoration: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-bottom: 15px; transition: background 0.2s;">
+                    📞 +375 29 655-47-80
                 </a>
                 
                 <p style="color: #999; font-size: 13px; margin-bottom: 20px;">Нажмите, чтобы позвонить с телефона</p>
@@ -131,6 +131,15 @@ function checkout() {
     `;
     
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // === НОВЫЙ КОД: Закрытие по клику вне окна ===
+    const modal = document.getElementById('checkout-modal');
+    modal.addEventListener('click', (e) => {
+        // Если клик был именно по фону (а не по карточке внутри), закрываем
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", renderCartPage);
