@@ -1,7 +1,14 @@
 /* логика вывода товаров */
 function renderProducts(productsToRender = productsData) {
-    // Сортируем по названию (по алфавиту)
-    productsToRender.sort((a, b) => a.title.localeCompare(b.title));
+        // Сортируем: сначала сковородки, потом всё остальное по алфавиту
+    productsToRender.sort((a, b) => {
+        const aIsPan = a.title.toLowerCase().includes('сковорода');
+        const bIsPan = b.title.toLowerCase().includes('сковорода');
+
+        if (aIsPan && !bIsPan) return -1; // Сковорода всегда выше
+        if (!aIsPan && bIsPan) return 1;  // Не сковорода всегда ниже
+        return a.title.localeCompare(b.title); // Если оба сковороды или оба не сковороды — по алфавиту
+    });
 
     const container = document.getElementById('products-container');
     if (!container) return;
@@ -95,13 +102,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- Проверка чекбоксов (фильтров) ---
             if (activeFilters.length > 0) {
-                // Товар должен содержать ВСЕ выбранные теги
-                const hasAllTags = activeFilters.every(filterValue => {
-                    return product.categories && product.categories.includes(filterValue);
+                // Группируем фильтры по их типу (data-filter)
+                const groupedFilters = {};
+                
+                // Проходимся по всем выбранным чекбоксам и собираем их в группы
+                document.querySelectorAll('.filter-cb:checked').forEach(cb => {
+                    const filterType = cb.dataset.filter; // Например, "type" или "fabric"
+                    if (!groupedFilters[filterType]) {
+                        groupedFilters[filterType] = [];
+                    }
+                    groupedFilters[filterType].push(cb.value);
                 });
 
-                if (!hasAllTags) {
-                    return false;
+                // Теперь проверяем товар
+                // Логика: МЕЖДУ группами — "И" (товар должен подходить под каждую группу)
+                // ВНУТРИ группы — "ИЛИ" (товар должен подходить хотя бы под один вариант из группы)
+                for (const filterType in groupedFilters) {
+                    const values = groupedFilters[filterType];
+                    
+                    // Если в этой группе несколько значений, проверяем, есть ли ХОТЯ БЫ ОДНО у товара
+                    const hasMatch = values.some(value => {
+                        return product.categories && product.categories.includes(value);
+                    });
+
+                    if (!hasMatch) {
+                        return false; // Если ни одно значение из группы не подошло — товар не наш
+                    }
                 }
             }
 
