@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.title = product.title + " — УЮТНЫЙ ДОМ";
-
+        // Настройка картинок (галерея)
+    let productImages = product.images ? product.images : [product.image];
+    let currentImageIndex = 0;
     let currentSize = null;
     let currentPrice = product.price;
     let currentSpecs = product.specs || [];
@@ -58,7 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = `
             <div class="product-card-top">
                 <div class="product-image-block">
-                    <img src="${product.image}" alt="${product.title}">
+                    <!-- Стрелочка влево -->
+                    ${productImages.length > 1 ? `<button class="slider-btn prev-btn" onclick="changeImage(-1)">❮</button>` : ''}
+                    
+                    <img src="${productImages[currentImageIndex]}" alt="${product.title}" id="main-product-image">
+                    
+                    <!-- Стрелочка вправо -->
+                    ${productImages.length > 1 ? `<button class="slider-btn next-btn" onclick="changeImage(1)">❯</button>` : ''}
                 </div>
                 
                 <div class="product-info-block">
@@ -131,6 +139,26 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addToCartWithSize = function() {
         // Передаем ID товара, название размера и финальную цену
         addToCart(product.id, currentSize, currentPrice);
+    };
+
+        // Функция для переключения картинок
+    window.changeImage = function(direction) {
+        currentImageIndex += direction;
+        
+        // Если дошли до конца, возвращаемся в начало
+        if (currentImageIndex >= productImages.length) {
+            currentImageIndex = 0;
+        }
+        // Если ушли в минус, переходим в конец
+        if (currentImageIndex < 0) {
+            currentImageIndex = productImages.length - 1;
+        }
+        
+        // Обновляем картинку
+        const imgElement = document.getElementById('main-product-image');
+        if (imgElement) {
+            imgElement.src = productImages[currentImageIndex];
+        }
     };
 
     renderProduct(); 

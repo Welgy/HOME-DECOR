@@ -63,79 +63,44 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!productsContainer) return;
 
-    /* ГЛАВНАЯ ФУНКЦИЯ ФИЛЬТРАЦИИ */
-    function applyFilters() {
-        // 1. Получаем текст поиска
-        const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
-        
-        // 2. Собираем ВСЕ выбранные чекбоксы (и запоминаем, в какой категории они находятся)
-        const activeFilters = [];
-        document.querySelectorAll('.category-item').forEach(item => {
-            const categoryName = item.querySelector('.category-name').textContent.replace('▶', '').trim();
-            const checkboxes = item.querySelectorAll('.filter-cb');
-            
-            let hasChecked = false;
-            checkboxes.forEach(cb => {
-                if (cb.checked) {
-                    activeFilters.push(cb.value);
-                    hasChecked = true;
-                }
-            });
+function applyFilters() {
+    const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
-            // Если в этой категории есть выбранные чекбоксы, добавляем и саму категорию в фильтр
-            if (hasChecked) {
-                activeFilters.push(categoryName);
-            }
-        });
+    // Группируем выбранные чекбоксы по data-filter
+    const groupedFilters = {};
+    document.querySelectorAll('.filter-cb:checked').forEach(cb => {
+        const filterType = cb.dataset.filter;
+        if (!filterType) {
+            console.warn('У чекбокса нет data-filter:', cb);
+            return;
+        }
+        if (!groupedFilters[filterType]) groupedFilters[filterType] = [];
+        groupedFilters[filterType].push(cb.value);
+    });
 
-        // 3. Фильтруем базу данных
-        const filteredProducts = productsData.filter(product => {
-            // --- Проверка поиска ---
-            if (searchQuery) {
-                const matchesTitle = product.title.toLowerCase().includes(searchQuery);
-                const matchesCategory = product.categories && product.categories.some(cat => cat.toLowerCase().includes(searchQuery));
-                
-                if (!matchesTitle && !matchesCategory) {
-                    return false; 
-                }
-            }
+    const filteredProducts = productsData.filter(product => {
+        // Поиск
+        if (searchQuery) {
+            const matchesTitle = product.title.toLowerCase().includes(searchQuery);
+            const matchesCategory = product.categories &&
+                product.categories.some(cat => cat.toLowerCase().includes(searchQuery));
+            if (!matchesTitle && !matchesCategory) return false;
+        }
 
-            // --- Проверка чекбоксов (фильтров) ---
-            if (activeFilters.length > 0) {
-                // Группируем фильтры по их типу (data-filter)
-                const groupedFilters = {};
-                
-                // Проходимся по всем выбранным чекбоксам и собираем их в группы
-                document.querySelectorAll('.filter-cb:checked').forEach(cb => {
-                    const filterType = cb.dataset.filter; // Например, "type" или "fabric"
-                    if (!groupedFilters[filterType]) {
-                        groupedFilters[filterType] = [];
-                    }
-                    groupedFilters[filterType].push(cb.value);
-                });
+        // Фильтры: И между группами, ИЛИ внутри группы
+        for (const filterType in groupedFilters) {
+            const values = groupedFilters[filterType];
+            const hasMatch = values.some(value =>
+                product.categories && product.categories.includes(value)
+            );
+            if (!hasMatch) return false;
+        }
 
-                // Теперь проверяем товар
-                // Логика: МЕЖДУ группами — "И" (товар должен подходить под каждую группу)
-                // ВНУТРИ группы — "ИЛИ" (товар должен подходить хотя бы под один вариант из группы)
-                for (const filterType in groupedFilters) {
-                    const values = groupedFilters[filterType];
-                    
-                    // Если в этой группе несколько значений, проверяем, есть ли ХОТЯ БЫ ОДНО у товара
-                    const hasMatch = values.some(value => {
-                        return product.categories && product.categories.includes(value);
-                    });
+        return true;
+    });
 
-                    if (!hasMatch) {
-                        return false; // Если ни одно значение из группы не подошло — товар не наш
-                    }
-                }
-            }
-
-            return true;
-        });
-
-        renderProducts(filteredProducts);
-    }
+    renderProducts(filteredProducts);
+}
 
     // Слушаем клики по чекбоксам
     document.addEventListener('change', (e) => {

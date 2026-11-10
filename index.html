@@ -224,30 +224,31 @@
                 <div class="filter-level-1" id="level-1-toggle-pans">
                     Сковороды <span class="arrow">▼</span>
                 </div>
-                                <div class="filter-level-2" id="level-2-menu-pans">
-                    <!-- Обычные сковороды -->
-                    <div class="category-item">
-                        <div class="category-name">Сковорода классическая <span class="arrow">▶</span></div>
-                        <div class="category-submenu">
-                            <div class="submenu-title">Размеры</div>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="20 см"> 20 см</label>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="22 см"> 22 см</label>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="24 см"> 24 см</label>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="26 см"> 26 см</label>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="28 см"> 28 см</label>
-                        </div>
-                    </div>
+<div class="filter-level-2" id="level-2-menu-pans">
 
-                    <!-- Блинные сковороды -->
-                    <div class="category-item">
-                        <div class="category-name">Сковорода блинная <span class="arrow">▶</span></div>
-                        <div class="category-submenu">
-                            <div class="submenu-title">Размеры</div>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="22 см"> 22 см</label>
-                            <label><input type="checkbox" class="filter-cb" data-filter="type" value="24 см"> 24 см</label>
-                        </div>
-                    </div>
-                </div>
+    <!-- Тип сковороды (главный фильтр) -->
+    <div class="category-item">
+        <div class="category-name">Тип сковороды <span class="arrow">▶</span></div>
+        <div class="category-submenu">
+            <div class="submenu-title">Тип</div>
+            <label><input type="checkbox" class="filter-cb" data-filter="panType" value="Сковорода классическая"> Классическая</label>
+            <label><input type="checkbox" class="filter-cb" data-filter="panType" value="Сковорода блинная"> Блинная</label>
+        </div>
+    </div>
+
+    <!-- Размеры -->
+    <div class="category-item">
+        <div class="category-name">Размер <span class="arrow">▶</span></div>
+        <div class="category-submenu">
+            <div class="submenu-title">Размеры</div>
+            <label><input type="checkbox" class="filter-cb" data-filter="panSize" value="20 см"> 20 см</label>
+            <label><input type="checkbox" class="filter-cb" data-filter="panSize" value="22 см"> 22 см</label>
+            <label><input type="checkbox" class="filter-cb" data-filter="panSize" value="24 см"> 24 см</label>
+            <label><input type="checkbox" class="filter-cb" data-filter="panSize" value="26 см"> 26 см</label>
+            <label><input type="checkbox" class="filter-cb" data-filter="panSize" value="28 см"> 28 см</label>
+        </div>
+    </div>
+</div>
                                 <!-- Кнопка сброса фильтров (в самом низу) -->
                 <button id="reset-filters" class="reset-btn-main">Сбросить фильтры</button>
             </aside>

@@ -48,6 +48,33 @@
             object-fit: cover;
             transition: transform 0.3s ease;
         }
+
+                /* Стили для кнопок-стрелочек */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .slider-btn:hover {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+        
         .product-image-block img:hover {
             transform: scale(1.05);
         }
