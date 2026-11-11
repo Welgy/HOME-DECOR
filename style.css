@@ -18,10 +18,12 @@ body {
     gap: 20px;
 }
 .logo {
-    font-weight: bold;
-    font-size: 24px;
-    color: #0c1a30;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 28px;
+    color: #e62e6b;
     text-decoration: none;
+    letter-spacing: 1px;
 }
 .contacts {
     font-weight: bold;

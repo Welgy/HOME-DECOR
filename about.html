@@ -45,9 +45,14 @@
             flex-direction: column;
             justify-content: center;
         }
-        .about-info h1 {
-            font-size: 32px;
-            margin: 0 0 10px 0;
+        .about-title {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Красивый шрифт с засечками */
+            font-size: 38px; /* Сделали чуть крупнее */
+            font-weight: normal; /* Убрали жирность для элегантности */
+            letter-spacing: 1px; /* Немного разрядили буквы */
+            color: #194693; /* Фирменный синий цвет сайта */
+            margin: 0 0 20px 0;
+            text-transform: capitalize; /* Делает первую букву заглавной */
         }
         .about-rating {
             color: #f5a623;
@@ -158,7 +163,7 @@
 <body>
 
     <header class="site-header">
-        <a href="index.html" class="logo">УЮТНЫЙ ДОМ</a>
+        <a href="index.html" class="logo">Уютный Дом</a>
         <div class="header-center">
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Поиск">
@@ -198,7 +203,7 @@
             </div>
             
             <div class="about-info">
-                <h1>Товары Для Дома</h1>
+                <h1 class="about-title">Товары для дома</h1>
                 <ul class="contact-list">
                     <li>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
