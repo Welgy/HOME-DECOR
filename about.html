@@ -25,19 +25,61 @@
 
         .about-gallery {
             flex: 1.5;
-            display: flex;
-            gap: 10px;
+            position: relative;
             height: 350px;
-            max-width: 60%; /* Ограничиваем ширину галереи */
-            overflow: hidden; /* Скрываем всё, что вылезает */
+            max-width: 60%;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f8f9fa;
+        }
+
+        .gallery-track {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Скрываем полосу прокрутки в Firefox */
         }
         
-        .about-gallery img {
-            width: 100%; 
-            height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
+        .gallery-track::-webkit-scrollbar {
+            display: none; /* Скрываем полосу прокрутки в Chrome/Safari */
         }
+
+        .gallery-track img {
+            flex: 0 0 100%; /* Каждая картинка занимает 100% ширины */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Картинки заполняют блок без искажений */
+            scroll-snap-align: center; /* Прилипание при прокрутке */
+        }
+
+        /* Стили для стрелочек */
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            color: #194693;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .gallery-btn:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .gallery-btn.prev { left: 10px; }
+        .gallery-btn.next { right: 10px; }
 
         .about-info {
             flex: 1;
@@ -197,9 +239,16 @@
         
         <!-- Верхний блок -->
         <div class="about-top">
-            <div class="about-gallery">
-                <img src="images/shop1.png" alt="Магазин внутри 1">
-                <img src="images/shop2.png" alt="Магазин внутри 1">
+                        <div class="about-gallery">
+                <button class="gallery-btn prev" onclick="scrollGallery(-1)">❮</button>
+                <div class="gallery-track" id="gallery-track">
+                    <img src="images/shop1.jpg" alt="Терраса">
+                    <img src="images/shop2.jpg" alt="Вход в магазин">
+                    <img src="images/shop3.jpg" alt="Фасад здания">
+                    <img src="images/shop4.jpg" alt="Вход в магазин с лестницей">
+                    <img src="images/shop5.jpg" alt="Фасад и терраса">
+                </div>
+                <button class="gallery-btn next" onclick="scrollGallery(1)">❯</button>
             </div>
             
             <div class="about-info">
@@ -269,5 +318,13 @@
     </div>
     <script src="products-data.js"></script>
     <script src="cart.js"></script>
+    <script>
+        function scrollGallery(direction) {
+            const track = document.getElementById('gallery-track');
+            const imageWidth = track.clientWidth; // Получаем ширину одной картинки
+            track.scrollBy({ left: direction * imageWidth, behavior: 'smooth' });
+        }
+    </script>
+</body>
 </body>
 </html>
