@@ -30,7 +30,7 @@
             max-width: 60%;
             overflow: hidden;
             border-radius: 12px;
-            background: #f8f9fa;
+            background: #f8f9fa; /* Фон уже светло-серый, это хорошо */
         }
 
         .gallery-track {
@@ -88,6 +88,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start; /* <-- Прижимаем всё содержимое к левому краю */
+            padding-left: 20px; /* <-- Добавляем небольшой отступ от галереи, чтобы не прилипало */
         }
         .about-title {
             font-family: 'Georgia', 'Times New Roman', serif; /* Красивый шрифт с засечками */
@@ -244,23 +246,24 @@
         
         <!-- Верхний блок -->
         <div class="about-top">
-                        <div class="about-gallery">
+            <div class="about-gallery">
                 <button class="gallery-btn prev" onclick="scrollGallery(-1)">❮</button>
                 <div class="gallery-track" id="gallery-track">
-                    <img src="images/shop1.jpg" alt="Терраса">
-                    <img src="images/shop2.jpg" alt="Вход в магазин">
-                    <img src="images/shop3.jpg" alt="Фасад здания">
-                    <img src="images/shop4.jpg" alt="Вход в магазин с лестницей">
-                    <img src="images/shop5.jpg" alt="Фасад и терраса">
+                    <img src="images/shop1.jpg" alt="Терраса" onclick="openModal(this.src)" style="cursor: zoom-in;">
+                    <img src="images/shop2.jpg" alt="Вход в магазин" onclick="openModal(this.src)" style="cursor: zoom-in;">
+                    <img src="images/shop6.jpg" alt="Вход в магазин" onclick="openModal(this.src)" style="cursor: zoom-in;">
+                    <img src="images/shop3.jpg" alt="Фасад здания" onclick="openModal(this.src)" style="cursor: zoom-in;">
+                    <img src="images/shop4.jpg" alt="Вход в магазин с лестницей" onclick="openModal(this.src)" style="cursor: zoom-in;">
+                    <img src="images/shop5.jpg" alt="Фасад и терраса" onclick="openModal(this.src)" style="cursor: zoom-in;">
                 </div>
                 <button class="gallery-btn next" onclick="scrollGallery(1)">❯</button>
             </div>
             
             <div class="about-info">
-                <h1 class="about-title">
-    Товары для дома
-    <img src="images/logo.jpg" alt="Иконка" style="height: 40px; vertical-align: middle; margin-left: 10px; border-radius: 6px;">
-</h1>
+                <h1 class="about-title" style="display: flex; align-items: center; gap: 15px;">
+                    <img src="images/logo.jpg" alt="Иконка" style="height: 45px; border-radius: 6px;">
+                    Товары для дома
+                </h1>
                 <ul class="contact-list">
                     <li>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -324,15 +327,78 @@
         </div>
 
     </div>
+    
+    <!-- Подключаем скрипты -->
     <script src="products-data.js"></script>
     <script src="cart.js"></script>
-    <script>
+    
+    <!-- Модальное окно для просмотра фото -->
+    <div id="image-modal" class="image-modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        
+        <!-- Стрелка влево -->
+        <button class="modal-btn prev" onclick="changeModalImage(event, -1)">❮</button>
+        
+        <!-- Картинка -->
+        <img id="modal-img" src="" alt="Просмотр фото" onclick="event.stopPropagation()">
+        
+        <!-- Стрелка вправо -->
+        <button class="modal-btn next" onclick="changeModalImage(event, 1)">❯</button>
+    </div>
+
+    <!-- Скрипты для галереи и модального окна -->
+        <script>
+        // Функции для слайдера (галереи)
         function scrollGallery(direction) {
             const track = document.getElementById('gallery-track');
-            const imageWidth = track.clientWidth; // Получаем ширину одной картинки
+            const imageWidth = track.clientWidth; 
             track.scrollBy({ left: direction * imageWidth, behavior: 'smooth' });
         }
+
+        // Переменные для модального окна
+        let currentModalImages = [];
+        let currentModalIndex = 0;
+
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            
+            // Собираем все картинки из галереи в массив
+            const allImages = document.querySelectorAll('.gallery-track img');
+            currentModalImages = Array.from(allImages).map(img => img.src);
+            
+            // Находим индекс той картинки, на которую кликнули
+            currentModalIndex = currentModalImages.indexOf(src);
+
+            modal.style.display = 'flex';
+            modalImg.src = src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Функция перелистывания фото в модальном окне
+        function changeModalImage(event, direction) {
+            event.stopPropagation(); // Чтобы клик по стрелке не закрывал окно
+            
+            currentModalIndex += direction;
+            
+            // Если дошли до конца, переключаем на начало
+            if (currentModalIndex >= currentModalImages.length) {
+                currentModalIndex = 0;
+            }
+            // Если ушли в минус, переключаем на конец
+            if (currentModalIndex < 0) {
+                currentModalIndex = currentModalImages.length - 1;
+            }
+            
+            // Меняем картинку
+            document.getElementById('modal-img').src = currentModalImages[currentModalIndex];
+        }
     </script>
-</body>
 </body>
 </html>
