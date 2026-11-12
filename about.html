@@ -26,11 +26,11 @@
         .about-gallery {
             flex: 1.5;
             position: relative;
-            height: 350px;
+            aspect-ratio: 3 / 2; 
             max-width: 60%;
             overflow: hidden;
             border-radius: 12px;
-            background: #f8f9fa;
+            background: #f8f9fa; /* Фон уже светло-серый, это хорошо */
         }
 
         .gallery-track {
@@ -47,11 +47,13 @@
         }
 
         .gallery-track img {
-            flex: 0 0 100%; /* Каждая картинка занимает 100% ширины */
+            flex: 0 0 100%;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Картинки заполняют блок без искажений */
-            scroll-snap-align: center; /* Прилипание при прокрутке */
+            object-fit: contain; /* Фото видно полностью, без обрезки */
+            scroll-snap-align: center;
+            padding: 10px; /* Небольшой отступ, чтобы фото не прилипало к краям */
+            box-sizing: border-box;
         }
 
         /* Стили для стрелочек */
@@ -90,9 +92,9 @@
         .about-title {
             font-family: 'Georgia', 'Times New Roman', serif; /* Красивый шрифт с засечками */
             font-size: 28px; /* Сделали чуть крупнее */
-            font-weight: normal; /* Убрали жирность для элегантности */
+            font-weight: bold; /* Убрали жирность для элегантности */
             letter-spacing: 1px; /* Немного разрядили буквы */
-            color: #194693; /* Фирменный синий цвет сайта */
+            color: #e62e6b; /* Фирменный синий цвет сайта */
             margin: 0 0 20px 0;
             text-transform: capitalize; /* Делает первую букву заглавной */
         }
@@ -205,7 +207,10 @@
 <body>
 
     <header class="site-header">
-        <a href="index.html" class="logo">Уютный Дом</a>
+        <a href="index.html" class="logo">
+    <img src="images/logo.jpg" alt="Логотип">
+    Уютный Дом
+</a>
         <div class="header-center">
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Поиск">
@@ -252,7 +257,10 @@
             </div>
             
             <div class="about-info">
-                <h1 class="about-title">Товары для дома</h1>
+                <h1 class="about-title">
+    Товары для дома
+    <img src="images/logo.jpg" alt="Иконка" style="height: 40px; vertical-align: middle; margin-left: 10px; border-radius: 6px;">
+</h1>
                 <ul class="contact-list">
                     <li>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

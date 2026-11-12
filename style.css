@@ -11,19 +11,31 @@ body {
 .site-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding: 15px 40px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    gap: 20px;
+    gap: 40px;
 }
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 28px;
     color: #e62e6b;
     text-decoration: none;
     letter-spacing: 1px;
+    flex: 0 0 auto;
+    min-width: auto;
+    white-space: nowrap;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    border-radius: 6px;
 }
 .contacts {
     font-weight: bold;
@@ -158,12 +170,9 @@ body {
     display: flex;
     align-items: center;
     gap: 30px;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 /* стили для корзины */
@@ -407,24 +416,15 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    gap: 20px;
-}
-
 /* контейнер для поиска */
 .search-container {
     flex: 1;
-    max-width: 600px;
+    max-width: 100%;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: 100px;
+    margin-left: 0;
 }
 
 /* строка ввода */
@@ -474,15 +474,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-}
-
-/* Обновляем поиск */
-.search-container {
     width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-left: 100px;
 }
 
 .main-nav {
@@ -555,12 +547,6 @@ body {
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     font-family: Arial, sans-serif;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
 }
 
 /* стили для ссылки "Вернуться в каталог" в избранном */

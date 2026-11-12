@@ -1,13 +1,51 @@
 /* логика вывода товаров */
 function renderProducts(productsToRender = productsData) {
-        // Сортируем: сначала сковородки, потом всё остальное по алфавиту
-    productsToRender.sort((a, b) => {
-        const aIsPan = a.title.toLowerCase().includes('сковорода');
-        const bIsPan = b.title.toLowerCase().includes('сковорода');
+    
+    // Задаем порядок (приоритет) для категорий. Чем меньше число, тем выше товар.
+    const categoryPriority = {
+        "Сковороды": 1,
+        "Кастрюли": 2,
+        "Комплекты постельного белья": 3,
+        "Наволочки": 4,
+        "Пододеяльники": 5,
+        "Простыни": 6,
+        "Простыни на резинке": 7,
+        "Подушки": 8,
+        "Одеяла": 9,
+        "Покрывала": 10
+    };
 
-        if (aIsPan && !bIsPan) return -1; // Сковорода всегда выше
-        if (!aIsPan && bIsPan) return 1;  // Не сковорода всегда ниже
-        return a.title.localeCompare(b.title); // Если оба сковороды или оба не сковороды — по алфавиту
+    // Сортируем товары
+    productsToRender.sort((a, b) => {
+        // Ищем, к какой категории относится товар (берем первый совпавший приоритет)
+        let aPriority = 99; // По умолчанию, если категория не найдена, ставим в конец
+        let bPriority = 99;
+
+        if (a.categories) {
+            for (let cat of a.categories) {
+                if (categoryPriority[cat]) {
+                    aPriority = categoryPriority[cat];
+                    break; 
+                }
+            }
+        }
+
+        if (b.categories) {
+            for (let cat of b.categories) {
+                if (categoryPriority[cat]) {
+                    bPriority = categoryPriority[cat];
+                    break;
+                }
+            }
+        }
+
+        // Сначала сортируем по приоритету категорий
+        if (aPriority !== bPriority) {
+            return aPriority - bPriority;
+        }
+
+        // Если категории одинаковые (например, обе наволочки), сортируем по алфавиту
+        return a.title.localeCompare(b.title);
     });
 
     const container = document.getElementById('products-container');
