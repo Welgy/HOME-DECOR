@@ -98,13 +98,14 @@ body {
 
 /* шапка сайта */
 .site-header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    gap: 40px;
+    gap: 10px;
 }
 .logo {
     display: flex;
@@ -557,13 +558,16 @@ body {
 
 /* центральный блок шапки */
 .header-center {
-    flex: 1;
-    max-width: 600px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px; /* Сохраняем вашу ширину */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    width: 100%;
+    gap: 10px;
+    z-index: 10;
 }
 
 .main-nav {
@@ -691,7 +695,9 @@ body {
         padding: 10px 15px;
         gap: 10px;
     }
-    .header-center {
+.header-center {
+        position: static;
+        transform: none;
         width: 100%;
         max-width: 100%;
     }
